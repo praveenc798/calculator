@@ -1,11 +1,11 @@
 <html>
-  <form name = "Calculator">
+<form name = "Calculator">
   <input id = "display" name = "display" placeholder = ""/>    
   <br>
     <!-- BUTTONS -->
 <div class = "button-container">  
   <input id = "btn-red" type = "button" value = "AC" onClick = "btnclear()"/>
-  <input id = "btn" type = "button" value = "C" onClick = "document.Calculator.display.value += '7'"/>
+  <input id = "btn" type = "button" value = "C" onClick = "btnclear()"/>
   <input id = "btn" type = "button" value = "/" onClick = "btndiv()"/>
   <input id = "btn" type = "button" value = "X" onClick = "btnmult()"/>
   <br>
@@ -34,7 +34,7 @@
  
 </form>
 
-<SCRIPT>
+<script>
   function btnclear() {
     document.Calculator.display.value = "";
     document.Calculator.display.value.style.textAlign = "right";
@@ -63,10 +63,10 @@
     document.Calculator.display.value += "+";
     document.Calculator.display.value.style.textAlign = "right";
   }
-</SCRIPT>
+</script>
 <style>
 #display {
-  width: 195px;
+  width: 200px;
   height: 100px;
   font-size: 40px;
   color:white;
