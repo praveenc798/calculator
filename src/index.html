@@ -1,31 +1,128 @@
-<div id="calculator">
-  <div id="screen" class="col-xs-12">
-    <div id="expression"><textarea readonly></textarea></div>
-    <div id="answer">
-      <p>
-        <!-- Evaluation goes here -->
-      </p>
-    </div>
-  </div>
-  <button style="background-color:red;"id="clear" class="eraser col-xs-3">AC</button>
-  <button id="erase" class="eraser col-xs-3">C</button>
-  <button id="divide" class="operator col-xs-3">/</button>
-  <button id="multiply" class="operator col-xs-3">x</button>
-  <button class="number col-xs-3">7</button>
-  <button class="number col-xs-3">8</button>
-  <button class="number col-xs-3">9</button>
-  <button id="substract" class="operator col-xs-3">-</button>
-  <button class="number col-xs-3">4</button>
-  <button class="number col-xs-3">5</button>
-  <button class="number col-xs-3">6</button>
-  <button id="add" class="operator col-xs-3">+</button>
-  <div class="col-xs-9 bottom-group">
-    <button class="number col-xs-4">1</button>
-    <button class="number col-xs-4">2</button>
-    <button class="number col-xs-4">3</button>
-    <button class="number col-xs-4">0</button>
-    <button class="number col-xs-4">.</button>
-    <button id="ansSaver" class="col-xs-4">Ans</button>
-  </div>
-  <button id="equal" class="col-xs-3">=</button>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+</head>
+<div class="calculator">
+  <div id="screen"></div>
+  <div class="item" id="ce">CE</div>
+  <div class="item" id="open-bracket">(</div>
+  <div class="item" id="close-bracket">)</div>
+  <div class="item" id="delete">Delete</div>
+  <div class="item" id="seven">7</div>
+  <div class="item" id="eight">8</div>
+  <div class="item" id="nine">9</div>
+  <div class="item" id="divide">/</div>
+  <div class="item" id="four">4</div>
+  <div class="item" id="five">5</div>
+  <div class="item" id="six">6</div>
+  <div class="item" id="multiply">*</div>
+  <div class="item" id="one">1</div>
+  <div class="item" id="two">2</div>
+  <div class="item" id="three">3</div>
+  <div class="item" id="substract">-</div>
+  <div class="item" id="zero">0</div>
+  <div class="item" id="dot">.</div>
+  <div class="item" id="equal">=</div>
+  <div class="item" id="add">+</div>
 </div>
+<script>
+let keyValue,
+    cal = '';
+
+let displayMathProblem = (cal) => {
+  $('div#screen').text(cal).css('color', 'black');
+  console.log(cal);
+};
+
+let displayWarning = (exception) => {
+  $('div#screen').append(' Wrong format').css('color', 'red');
+  console.log("Exception thrown: " + exception);
+}
+
+$('div.item').on('click', (event) => {
+  keyValue = $(event.target).text();
+  if(keyValue === "CE") {
+    cal = "";
+    displayMathProblem(cal);
+  } else if (keyValue === "Delete") {
+    cal = cal.slice(0, -1);
+    displayMathProblem(cal);
+  } else if(keyValue === "=") {
+    try {
+      cal = eval(cal);
+      displayMathProblem(cal);
+      cal = "";
+    } catch (ex) {
+      displayWarning(ex);
+    }
+  } else {
+    cal += keyValue;
+    displayMathProblem(cal);
+  }
+});
+</script>
+<style>
+body {
+	 background: white;
+	 display: flex;
+	 justify-content: center;
+	 margin: 100px;
+	 font-family: Arial;
+}
+ .calculator {
+	 width: 320px;
+	 display: flex;
+	 flex-flow: wrap row;
+	 justify-content: space-between;
+	 padding: 1px 1px 5px 1px;
+	 border: 2px solid black;
+	 border-radius: 1px;
+	 background: white;
+}
+ .item {
+	 top: 0px;
+	 box-shadow: 0px 0px 0px #00823f; height: 64px;
+	 width: 76px;
+	 margin-top: 10px;
+	 position: relative;
+	 flex-flow: wrap row;
+	 background: white;
+	 border-radius: 4px;
+	 cursor: pointer;
+	 transition: all ease 0.3s;
+	 line-height: 64px;
+	 font-size: 1.12em;
+	 text-align: center;
+	 color: black;
+}
+ .item:active {
+	 top: 2px;
+	 box-shadow: 0px 2px 0px #00823f;
+}
+ #screen {
+	 flex: 100%;
+	 margin: 0;
+	 padding-right: 7px;
+	 height: 110px;
+	 color: black;
+	 background: white;
+	 border-bottom: 2px solid black;
+     line-height: 40px;
+	 font-size: 1.2em;
+	 text-align: right;
+	 font-weight: 600;
+	 letter-spacing: 0.02em;
+}
+ #delete {
+	 font-size: 1em;
+}
+.item:hover{
+    background-color: #C84F1B;
+}
+#ce {
+  background-color: red;
+  }
+
+ </style>
+ </html>
